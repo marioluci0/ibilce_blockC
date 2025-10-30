@@ -98,6 +98,7 @@ main.exe: /usr/lib/Scrt1.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/libgcc.a \
   /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib/libGL.so \
+  /usr/lib/libGLU.so \
   /usr/lib/libGLX.so.0 \
   /usr/lib/libGLdispatch.so.0 \
   /usr/lib/libICE.so.6 \
@@ -118,12 +119,15 @@ main.exe: /usr/lib/Scrt1.o \
   /usr/lib/libglut.so \
   /usr/lib/libm.so.6 \
   /usr/lib/libmvec.so.1 \
+  /usr/lib/libstdc++.so.6 \
   /usr/lib/libuuid.so.1 \
   /usr/lib/libxcb.so.1 \
   CMakeFiles/main.exe.dir/main.c.o
 
 
 /usr/lib/libxcb.so.1:
+
+/usr/lib/libstdc++.so.6:
 
 /usr/lib/libmvec.so.1:
 
@@ -146,6 +150,8 @@ main.exe: /usr/lib/Scrt1.o \
 /usr/lib/libX11.so.6:
 
 /usr/lib/libGLdispatch.so.0:
+
+/usr/lib/libGLU.so:
 
 /usr/lib/ld-linux-x86-64.so.2:
 

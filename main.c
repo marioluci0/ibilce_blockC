@@ -21,6 +21,12 @@ void making_sun();
 void making_macaneta();
 void making_window();
 void making_sky();
+void making_house();
+
+void audi_c();
+void block1();
+void block2();
+void block3();
 
 //Declara��o de Vari�veis Globis
 int projecao=0; //Vari�vel L�gica para Definir o Tipo de Proje��o (Perspectiva ou Ortogonal)
@@ -231,6 +237,29 @@ void making_sky(){
   glPopMatrix();
 }
 
+void making_house(){
+    glTranslatef(0, translado, 0);
+    glScalef(escala, escala, escala);
+    making_cube();
+    making_window();
+    
+    glPushMatrix();
+    glTranslatef(-3, 0, 10);
+    glRotatef(rotating, 0, 1, 0);
+    glTranslatef(3, 0, -10);
+    making_door();
+    glPopMatrix();
+    
+    making_roof();
+
+    glPushMatrix();
+    glRotatef(timeOfDay, 0, 0, 1);
+    making_sun();
+    glPopMatrix();
+
+    making_sky();
+}
+
 void stroke_output(GLfloat x, GLfloat y, char *format,...)//fun��o para escrever em 3d
 {
     va_list args;
@@ -245,6 +274,52 @@ void stroke_output(GLfloat x, GLfloat y, char *format,...)//fun��o para escr
     glPopMatrix();
 }
 
+void making_text() {
+    glColor3ub(0,0,0);
+    glPushMatrix();
+    glTranslatef(-35, 41, 40.2);
+    stroke_output(0, 0, "CASA ABRIDANTE EM openGL!!");
+    glPopMatrix();
+}
+
+void audi_c(){
+    glColor3ub(205, 102, 0);
+    glPushMatrix();
+    glScalef(15, 15, 15);
+    glTranslatef(-13, 0, -10);
+    glutSolidCube(20);
+    glPopMatrix();
+}
+
+// class block from 1 to 5
+void block1(){
+    glColor3ub(205, 102, 0);
+    glPushMatrix();
+    glScalef(18, 5, 15);
+    glTranslatef(13, 10, -10);
+    glutSolidCube(20);
+    glPopMatrix();
+}
+
+// class block from 6 to 10
+void block2(){
+    glColor3ub(205, 102, 0);
+    glPushMatrix();
+    glScalef(15, 5, 15);
+    glTranslatef(-13, 10, -50);
+    glutSolidCube(20);
+    glPopMatrix();
+}
+
+//class block from 11 to 15
+void block3(){
+    glColor3ub(205, 102, 0);
+    glPushMatrix();
+    glScalef(18, 5, 15);
+    glTranslatef(13, 10, -50);
+    glutSolidCube(20);
+    glPopMatrix();
+}
 // Inicializa par�metros de rendering
 void Inicializa(void)
 {
@@ -301,44 +376,37 @@ void DISPLAY(void)
     glutPostRedisplay();
 }
 
-void DesenharCena ()
+void DesenharCena()
 {
-    /*Crosta Terrestre*/
+    //Lower floor
     glColor3ub(100,200,0);
     glPushMatrix();
     glTranslatef(0,-0.02,0);
+    glScalef(120,0.01,120);
+    glutSolidCube(20);
+    glPopMatrix();
+    
+    //Upper floor
+    glColor3ub(72,72,72);
+    glPushMatrix();
+    glTranslatef(0,10,500);
     glScalef(60,0.01,60);
     glutSolidCube(20);
     glPopMatrix();
-    /******/
+
+    //Making Audi C
+    audi_c();
+
+    //making class blocks
+    block1();
+    block2();
+    block3();
+
 
     /*TEXTO Exemplo*/
-    glColor3ub(0,0,0);
-    glPushMatrix();
-    glTranslatef(-35, 41, 40.2);
-    stroke_output(0, 0, "CASA ABRIDANTE EM openGL!!");
-    glPopMatrix();
+    //making_text();
     
-    glTranslatef(0, translado, 0);
-    glScalef(escala, escala, escala);
-    making_cube();
-    making_window();
-    
-    glPushMatrix();
-    glTranslatef(-3, 0, 10);
-    glRotatef(rotating, 0, 1, 0);
-    glTranslatef(3, 0, -10);
-    making_door();
-    glPopMatrix();
-    
-    making_roof();
-
-    glPushMatrix();
-    glRotatef(timeOfDay, 0, 0, 1);
-    making_sun();
-    glPopMatrix();
-
-    making_sky();
+    //making_house();
 }
 
 void MOUSE_Button(int botao, int estado, int x, int y)
@@ -478,7 +546,7 @@ void keyboard(unsigned char tecla, int x, int y)
 void TeclasEspeciais (int key, int x, int y)
 {
     //Key - recebe o c�digo ASCII da tecla
-//x, y - recebem respectivamente as posi��es do cursor do mouse (permite tratar os dois dispositivos)
+    //x, y - recebem respectivamente as posi��es do cursor do mouse (permite tratar os dois dispositivos)
     if (key==GLUT_KEY_PAGE_UP)
     {
         posy+=5;
